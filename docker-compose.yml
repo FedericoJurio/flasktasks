@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+
+  flasktasks:
+    build:
+      context: ./flasktasks
+      dockerfile: Dockerfile
+    volumes:
+      - './flasktasks:/usr/src/app'
+    ports:
+      - 8000:8000
+    env_file:
+      - ./flasktasks/.env
+    depends_on:
+      - mongo
+
+  celery:
+    build:
+      context: ./flasktasks
+      dockerfile: Dockerfile
+    user: nobody
+    command: "celery -A app.celery worker --loglevel=info"
+    volumes:
+      - './flasktasks:/usr/src/app'
+    env_file:
+      - ./flasktasks/.env
+    depends_on:
+      - mongo
+      - redis
+
+  mongo:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_DATABASE: tasks
+      MONGO_INITDB_ROOT_USERNAME: secret
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    ports:
+      - 27018:27017
+    volumes:
+      - ./mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379

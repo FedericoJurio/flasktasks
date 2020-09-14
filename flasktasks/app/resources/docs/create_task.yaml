@@ -1,0 +1,26 @@
+Create a task
+---
+description: Creates a task with a command to be executed in background.
+tags:
+  - Tasks
+responses:
+  '201':
+    description: Task created
+    content:
+      application/json:
+        type: object
+        properties:
+          id:
+            type: string
+        example:
+          id: 5f5ee40395455a2188caeca1
+  '422':
+    description: Unprocessable Entity
+    content:
+      application/json:
+        type: object
+        properties:
+          message:
+            type: string
+        example:
+          message: Shorter than minimum length 1.

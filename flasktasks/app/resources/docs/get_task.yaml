@@ -1,0 +1,36 @@
+Get a task
+---
+description: Returns the output of the execution of the command associated with a task.
+tags:
+  - Tasks
+responses:
+  '200':
+    description: Task output
+    content:
+      application/json:
+        type: object
+        properties:
+          output:
+            type: string
+        example:
+          output: total 12\n-rw-r--r--    1 nobody   nobody         269 Sep 13 18:45 Dockerfile\ndrwxr-xr-x   10 nobody   nobody         320 Sep 14 02:56 app\n-rwxr-xr-x    1 nobody   nobody          76 Sep 13 05:15 entrypoint.sh\n-rw-r--r--    1 nobody   nobody         128 Sep 13 23:06 requirements.txt\n
+  '400':
+    description: Bad Request
+    content:
+      application/json:
+        type: object
+        properties:
+          message:
+            type: string
+        example:
+          message: Invalid identifier.
+  '404':
+    description: Not Found
+    content:
+      application/json:
+        type: object
+        properties:
+          message:
+            type: string
+        example:
+          message: Task 5f5edbf4df4e1f6cc2355980 does not exist.
