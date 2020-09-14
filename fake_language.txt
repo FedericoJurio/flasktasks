@@ -1,0 +1,26 @@
+<app>
+
+    <integer name='number'/>
+
+    <func signal='main'>
+        <print>Enter an integer:<print/>
+        <read_input>
+            <variable name='number'/>
+        <read_input/>
+
+        <find_all_divisors variable='number'/>
+    </func>
+
+    <func signal='find_all_divisors'>
+        <integer name='i' initial_value='1'/>
+        <while variable='i' <= variable='number >
+            <if variable='number' % i == 0>
+                <print>
+                    <variable name='i'/> is divisor of <variable name='number'/>
+                </print>
+            </if>
+            <add variable='i' value='1'/>
+        </while>
+    </func>
+
+ </app>
