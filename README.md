@@ -1,4 +1,4 @@
-# BitSight
+# Flask Tasks
 This service allows to create tasks with a command to be executed on background.
 
 ## Getting started
